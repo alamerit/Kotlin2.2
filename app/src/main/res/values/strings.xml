@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">gb_kotlin</string>
+    <string name="login">Логин</string>
+    <string name="pasvord">Пароль</string>
+</resources>
