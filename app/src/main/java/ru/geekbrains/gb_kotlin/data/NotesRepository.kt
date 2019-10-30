@@ -1,41 +1,77 @@
 package ru.geekbrains.gb_kotlin.data
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import ru.geekbrains.gb_kotlin.data.entity.Note
+import java.util.*
 
 object NotesRepository {
+    private val notesLiveData: MutableLiveData <List<Note>>
+        get() {
+            return notesLiveData
+        }
 
-    var notes : List<Note> = listOf(
+
+    private var notes = mutableListOf(
         Note(
+            UUID.randomUUID().toString(),
             "Юля",
             "Текст первой заметки. Не очень длинный, но очень интересный",
-            0xfff06292.toInt()
+            color = Note.Color.WHITE
         ),
         Note(
+            UUID.randomUUID().toString(),
+
             "Rt",
             "Текст второй заметки. Не очень длинный, но очень интересный",
-            0xff9575cd.toInt()
+            color = Note.Color.WHITE
         ),
         Note(
+            UUID.randomUUID().toString(),
+
             "Lena",
             "Текст третьей заметки. Не очень длинный, но очень интересный",
-            0xff64b5f6.toInt()
-        ),
+            color = Note.Color.WHITE        ),
         Note(
+            UUID.randomUUID().toString(),
+
             "Katya",
             "Текст четвертой заметки. Не очень длинный, но очень интересный",
-            0xff4db6ac.toInt()
-        ),
+            color = Note.Color.WHITE        ),
         Note(
+            UUID.randomUUID().toString(),
+
             "Таня",
             "Текст пятой заметки. Не очень длинный, но очень интересный",
-            0xffb2ff59.toInt()
-        ),
+            color = Note.Color.WHITE        ),
         Note(
+            UUID.randomUUID().toString(),
             "Мария",
             "Текст шестой заметки. Не очень длинный, но очень интересный",
-            0xffffeb3b.toInt()
-        )
+            color = Note.Color.WHITE        )
     )
+    init {
+        notesLiveData.value = notes
+    }
 
-    private set
+    fun getNotes():LiveData<List<Note>>{
+
+           return notesLiveData
+        }
+    fun saveNote(note: Note){
+        addOrReplace(note)
+        notesLiveData.value = notes
+    }
+
+    private fun addOrReplace(note: Note){
+        for (i in notes.indices) {
+            if (notes[i] == note) {
+                notes[i] = note
+                return
+            }
+        }
+        notes.add(note)
+
+    }
+
 }
