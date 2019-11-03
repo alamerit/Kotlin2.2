@@ -1,16 +1,15 @@
 package ru.geekbrains.gb_kotlin.ui.main
 
-import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import kotlinx.android.synthetic.main.item_note.view.*
 import ru.geekbrains.gb_kotlin.R
 import ru.geekbrains.gb_kotlin.data.entity.Note
 
-class NotesRVAdapter (val onItemClick: ((Note) ->Unit)? = null) : RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
+class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null ) : RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
 
     var notes: List<Note> = listOf()
         set(value) {
@@ -18,31 +17,28 @@ class NotesRVAdapter (val onItemClick: ((Note) ->Unit)? = null) : RecyclerView.A
             notifyDataSetChanged()
         }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false))
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false))
     override fun getItemCount() = notes.size
     override fun onBindViewHolder(vh: ViewHolder, pos: Int) = vh.bind(notes[pos])
 
-  inner  class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val titleText: TextView = itemView.findViewById( R.id.tv_title)
+        fun bind(note: Note) = with(itemView) {
+            tv_title.text = note.title
+            tv_text.text = note.text
 
-        private val textText: TextView = itemView.findViewById( R.id.tv_text)
-
-        fun bind(note: Note) = with(note) {
-            titleText.text = title
-            textText.text = text
-            val color = when(note.color){
-
-                Note.Color.WHITE  -> R.color.white
-                Note.Color.YELLOW-> R.color.yellow
-                Note.Color.GREEN-> R.color.green
-                Note.Color.BLUE-> R.color.blue
-                Note.Color.RED-> R.color.red
-                Note.Color.VIOLET-> R.color.violet
-
+            val color = when (note.color) {
+                Note.Color.WHITE -> R.color.white
+                Note.Color.YELLOW -> R.color.yellow
+                Note.Color.GREEN -> R.color.green
+                Note.Color.BLUE -> R.color.blue
+                Note.Color.RED -> R.color.red
+                Note.Color.VIOLET -> R.color.violet
             }
-            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context,color))
+
+            setBackgroundColor(ContextCompat.getColor(itemView.context, color))
             itemView.setOnClickListener {
                 onItemClick?.invoke(note)
             }

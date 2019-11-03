@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "45260917181",
+    "firebase_url": "https://telega-1d754.firebaseio.com",
+    "project_id": "telega-1d754",
+    "storage_bucket": "telega-1d754.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45260917181:android:7872f17f7d4a821634ead4",
+        "android_client_info": {
+          "package_name": "ru.geekbrains.gb_kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45260917181-cgnjdou1oidpeb0hoi2jot491cv2sbr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdfBBnZSyOU5z4hZzHk0hqth5Z87LrCIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45260917181-cgnjdou1oidpeb0hoi2jot491cv2sbr1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
