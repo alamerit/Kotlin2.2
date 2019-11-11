@@ -1,34 +1,116 @@
 {
   "project_info": {
-    "project_number": "45260917181",
-    "firebase_url": "https://telega-1d754.firebaseio.com",
-    "project_id": "telega-1d754",
-    "storage_bucket": "telega-1d754.appspot.com"
+    "project_number": "543329802300",
+    "firebase_url": "https://gbkotlin.firebaseio.com",
+    "project_id": "gbkotlin",
+    "storage_bucket": "gbkotlin.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:45260917181:android:7872f17f7d4a821634ead4",
+        "mobilesdk_app_id": "1:543329802300:android:10006d25a255fdc5",
         "android_client_info": {
           "package_name": "ru.geekbrains.gb_kotlin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "45260917181-cgnjdou1oidpeb0hoi2jot491cv2sbr1.apps.googleusercontent.com",
+          "client_id": "543329802300-kdoqitj3d563dsiphu8um7jnpeil8rnn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.geekbrains.gb_kotlin",
+            "certificate_hash": "b0c7dac8da2a578813af41329bde7455b65f393b"
+          }
+        },
+        {
+          "client_id": "543329802300-t40il07ttrfdeena1s4gocdda0nd8k0e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAdfBBnZSyOU5z4hZzHk0hqth5Z87LrCIE"
+          "current_key": "AIzaSyDmMBRZwhoYDriR8xkENeJ15KXxEUb3UX0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "45260917181-cgnjdou1oidpeb0hoi2jot491cv2sbr1.apps.googleusercontent.com",
+              "client_id": "543329802300-t40il07ttrfdeena1s4gocdda0nd8k0e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543329802300:android:71d9a76e9032b957",
+        "android_client_info": {
+          "package_name": "ru.geekbrains.kotlin_3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543329802300-9jbrlgh2pog82nvvh5ibvpvlksi4h79p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.geekbrains.kotlin_3",
+            "certificate_hash": "b0c7dac8da2a578813af41329bde7455b65f393b"
+          }
+        },
+        {
+          "client_id": "543329802300-t40il07ttrfdeena1s4gocdda0nd8k0e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmMBRZwhoYDriR8xkENeJ15KXxEUb3UX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543329802300-t40il07ttrfdeena1s4gocdda0nd8k0e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543329802300:android:ae8de6a05fa6a8cc",
+        "android_client_info": {
+          "package_name": "ru.geekbrains.kotlin_4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543329802300-238mcgqhk91rljjl78m08mimdnslb3v4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.geekbrains.kotlin_4",
+            "certificate_hash": "b0c7dac8da2a578813af41329bde7455b65f393b"
+          }
+        },
+        {
+          "client_id": "543329802300-t40il07ttrfdeena1s4gocdda0nd8k0e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmMBRZwhoYDriR8xkENeJ15KXxEUb3UX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543329802300-t40il07ttrfdeena1s4gocdda0nd8k0e.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

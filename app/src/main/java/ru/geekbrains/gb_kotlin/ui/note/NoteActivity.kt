@@ -9,9 +9,10 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_note.*
 import ru.geekbrains.gb_kotlin.R
+import ru.geekbrains.gb_kotlin.common.format
+import ru.geekbrains.gb_kotlin.common.getColorInt
 import ru.geekbrains.gb_kotlin.data.entity.Note
 import ru.geekbrains.gb_kotlin.ui.base.BaseActivity
-import java.text.SimpleDateFormat
 import java.util.*
 
 class NoteActivity : BaseActivity<Note?, NoteViewState>() {
@@ -35,6 +36,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         override fun afterTextChanged(s: Editable?) {
             saveNote()
         }
+
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     }
@@ -58,11 +60,10 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
     override fun renderData(data: Note?) {
         this.note = data
 
-        supportActionBar?.title = if (note != null) {
-            SimpleDateFormat(DATE_TIME_FORMAT, Locale.getDefault()).format(note!!.lastChanged)
-        } else {
-            getString(R.string.new_note_title)
-        }
+        supportActionBar?.title = note?.run {
+            lastChanged?.format(DATE_TIME_FORMAT)
+        } ?: getString(R.string.new_note_title)
+
 
         initView()
     }
@@ -71,23 +72,15 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         et_title.removeTextChangedListener(textChangeListener)
         et_body.removeTextChangedListener(textChangeListener)
 
-        if (note != null) {
-            et_title.setText(note?.title ?: "")
-            et_body.setText(note?.text ?: "")
-            val color = when (note!!.color) {
-                Note.Color.WHITE -> R.color.white
-                Note.Color.YELLOW -> R.color.yellow
-                Note.Color.GREEN -> R.color.green
-                Note.Color.BLUE -> R.color.blue
-                Note.Color.RED -> R.color.red
-                Note.Color.VIOLET -> R.color.violet
-            }
-
-            toolbar.setBackgroundColor(resources.getColor(color))
+        note?.let { note ->
+            et_title.setText(note.title)
+            et_body.setText(note.text)
+            toolbar.setBackgroundColor(note.color.getColorInt(this))
         }
 
         et_title.addTextChangedListener(textChangeListener)
         et_body.addTextChangedListener(textChangeListener)
+
     }
 
     fun saveNote() {
