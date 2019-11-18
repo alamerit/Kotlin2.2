@@ -7,7 +7,8 @@ import ru.geekbrains.gb_kotlin.data.entity.Note
 import ru.geekbrains.gb_kotlin.data.model.NoteResult
 import ru.geekbrains.gb_kotlin.ui.base.BaseViewModel
 
-class MainViewModel : BaseViewModel<List<Note>?, MainViewState>() {
+class MainViewModel(notesRepository: NotesRepository) :
+    BaseViewModel<List<Note>?, MainViewState>() {
 
     private val noteObserver = Observer<NoteResult> {
         it ?: return@Observer
@@ -22,7 +23,7 @@ class MainViewModel : BaseViewModel<List<Note>?, MainViewState>() {
         }
     }
 
-    private val repositoryNotes = NotesRepository.getNotes()
+    private val repositoryNotes = notesRepository.getNotes()
 
     init {
         viewStateLiveData.value = MainViewState()

@@ -5,11 +5,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_note.view.*
 import ru.geekbrains.gb_kotlin.R
 import ru.geekbrains.gb_kotlin.data.entity.Note
 
-class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null ) : RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
+class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null) :
+    RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
+
+    //ПЕРЕРЫВ!!!
 
     var notes: List<Note> = listOf()
         set(value) {
@@ -23,7 +27,8 @@ class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null ) : RecyclerView.
     override fun getItemCount() = notes.size
     override fun onBindViewHolder(vh: ViewHolder, pos: Int) = vh.bind(notes[pos])
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(override val containerView: View) :
+        RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(note: Note) = with(itemView) {
             tv_title.text = note.title
@@ -42,6 +47,7 @@ class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null ) : RecyclerView.
             itemView.setOnClickListener {
                 onItemClick?.invoke(note)
             }
+
         }
 
     }

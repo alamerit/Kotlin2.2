@@ -6,4 +6,7 @@
     <string name="logout_dialog_ok">Да</string>
     <string name="logout_dialog_cancel">Нет</string>
     <string name="logout_menu_title">Выход</string>
+    <string name="note_delete_message">Удалить?</string>
+    <string name="note_delete_cancel">Нет</string>
+    <string name="note_delete_ok">Да</string>
 </resources>

@@ -16,7 +16,7 @@ abstract class BaseActivity<T, S : BaseViewState<T>> : AppCompatActivity() {
         private const val RC_SIGN_IN = 4242
     }
 
-    abstract val viewModel: BaseViewModel<T, S>
+    abstract val model: BaseViewModel<T, S>
     abstract val layoutRes: Int?
 
 
@@ -25,7 +25,7 @@ abstract class BaseActivity<T, S : BaseViewState<T>> : AppCompatActivity() {
         layoutRes?.let {
             setContentView(it)
         }
-        viewModel.getViewState().observe(this, Observer<S> {
+        model.getViewState().observe(this, Observer<S> {
             it ?: return@Observer
             it.error?.let {
                 renderError(it)
