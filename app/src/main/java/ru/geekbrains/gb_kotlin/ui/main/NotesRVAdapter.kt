@@ -10,8 +10,7 @@ import kotlinx.android.synthetic.main.item_note.view.*
 import ru.geekbrains.gb_kotlin.R
 import ru.geekbrains.gb_kotlin.data.entity.Note
 
-class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null) :
-    RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
+class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null) : RecyclerView.Adapter<NotesRVAdapter.ViewHolder>() {
 
     //ПЕРЕРЫВ!!!
 
@@ -27,8 +26,7 @@ class NotesRVAdapter(val onItemClick: ((Note) -> Unit)? = null) :
     override fun getItemCount() = notes.size
     override fun onBindViewHolder(vh: ViewHolder, pos: Int) = vh.bind(notes[pos])
 
-    inner class ViewHolder(override val containerView: View) :
-        RecyclerView.ViewHolder(containerView), LayoutContainer {
+    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(note: Note) = with(itemView) {
             tv_title.text = note.title

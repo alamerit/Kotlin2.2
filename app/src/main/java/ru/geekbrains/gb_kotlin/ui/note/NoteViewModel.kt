@@ -1,52 +1,53 @@
 package ru.geekbrains.gb_kotlin.ui.note
 
+import android.support.annotation.VisibleForTesting
+import kotlinx.coroutines.launch
 import ru.geekbrains.gb_kotlin.data.NotesRepository
 import ru.geekbrains.gb_kotlin.data.entity.Note
-import ru.geekbrains.gb_kotlin.data.model.NoteResult
 import ru.geekbrains.gb_kotlin.ui.base.BaseViewModel
+import timber.log.Timber
 
-class NoteViewModel(private val notesRepository: NotesRepository) :
-    BaseViewModel<NoteViewState.Data, NoteViewState>() {
+class NoteViewModel(private val notesRepository: NotesRepository) : BaseViewModel<NoteData>() {
 
-//    init {
-//        viewStateLiveData.value = NoteViewState()
-//    }
-
-    private val pendingNote: Note?
-        get() = viewStateLiveData.value?.data?.note
+    private val currentNote: Note?
+        get() = getViewState().poll()?.note
 
     fun save(note: Note) {
-        viewStateLiveData.value = NoteViewState(NoteViewState.Data(note = note))
+        setData(NoteData(note = note))
     }
 
-    override fun onCleared() {
-        pendingNote?.let {
-            notesRepository.saveNote(it)
+    @VisibleForTesting
+    public override fun onCleared() {
+        launch {
+            currentNote?.let { notesRepository.saveNote(it) }
+            super.onCleared()
         }
     }
 
     fun loadNote(noteId: String) {
-        notesRepository.getNoteById(noteId).observeForever {
-            it ?: return@observeForever
-            when (it) {
-                is NoteResult.Success<*> -> viewStateLiveData.value =
-                    NoteViewState(NoteViewState.Data(note = it.data as? Note))
-                is NoteResult.Error -> viewStateLiveData.value = NoteViewState(error = it.error)
+        Timber.d("Before launch")
+        launch {
+            try {
+                Timber.d("Before getNoteById")
+                notesRepository.getNoteById(noteId).let {
+                    setData(NoteData(note = it))
+                }
+                Timber.d("After getNoteById")
+            } catch (e: Throwable) {
+                setError(e)
             }
         }
+
+        Timber.d("After launch")
     }
 
     fun deleteNote() {
-        pendingNote?.let {
-            notesRepository.deleteNote(it.id).observeForever { result ->
-                result?.let { result ->
-                    when (result) {
-                        is NoteResult.Success<*> -> viewStateLiveData.value =
-                            NoteViewState(NoteViewState.Data(isDeleted = true))
-                        is NoteResult.Error -> viewStateLiveData.value =
-                            NoteViewState(error = result.error)
-                    }
-                }
+        launch {
+            try {
+                currentNote?.let { notesRepository.deleteNote(it.id) }
+                setData(NoteData(isDeleted = true))
+            } catch (e: Throwable) {
+                setError(e)
             }
         }
     }

@@ -17,7 +17,7 @@ import ru.geekbrains.gb_kotlin.ui.base.BaseActivity
 import ru.geekbrains.gb_kotlin.ui.note.NoteActivity
 import ru.geekbrains.gb_kotlin.ui.splash.SplashActivity
 
-class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
+class MainActivity : BaseActivity<List<Note>?>() {
 
     companion object {
         fun start(context: Context) = Intent(context, MainActivity::class.java).run {
@@ -50,8 +50,7 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu) =
-        MenuInflater(this).inflate(R.menu.main, menu).let { true }
+    override fun onCreateOptionsMenu(menu: Menu) = MenuInflater(this).inflate(R.menu.main, menu).let { true }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.logout -> showLogoutDialog().let { true }

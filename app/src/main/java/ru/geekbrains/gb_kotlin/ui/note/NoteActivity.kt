@@ -18,7 +18,7 @@ import ru.geekbrains.gb_kotlin.data.entity.Note
 import ru.geekbrains.gb_kotlin.ui.base.BaseActivity
 import java.util.*
 
-class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
+class NoteActivity : BaseActivity<NoteData>() {
 
     companion object {
         private val EXTRA_NOTE = NoteActivity::class.java.name + "extra.NOTE"
@@ -63,9 +63,10 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
         }
 
         initView()
+
     }
 
-    override fun renderData(data: NoteViewState.Data) {
+    override fun renderData(data: NoteData) {
         if (data.isDeleted) {
             finish()
             return
@@ -80,8 +81,13 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
         et_body.removeTextChangedListener(textChangeListener)
 
         note?.let { note ->
-            et_title.setText(note.title)
-            et_body.setText(note.text)
+            if(et_title.text.toString() != note.title){
+                et_title.setText(note.title)
+            }
+            if(et_body.text.toString() != note.text){
+                et_body.setText(note.text)
+            }
+
             toolbar.setBackgroundColor(note.color.getColorInt(this))
             supportActionBar?.title = note.run {
                 lastChanged.format(DATE_TIME_FORMAT)
@@ -103,18 +109,12 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
             text = et_body.text.toString(),
             lastChanged = Date(),
             color = color
-        ) ?: Note(
-            UUID.randomUUID().toString(),
-            et_title.text.toString(),
-            et_body.text.toString(),
-            color
-        )
+        ) ?: Note(UUID.randomUUID().toString(), et_title.text.toString(), et_body.text.toString(), color)
 
         note?.let { model.save(it) }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu) =
-        MenuInflater(this).inflate(R.menu.note, menu).let { true }
+    override fun onCreateOptionsMenu(menu: Menu) = MenuInflater(this).inflate(R.menu.note, menu).let { true }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         android.R.id.home -> onBackPressed().let { true }
